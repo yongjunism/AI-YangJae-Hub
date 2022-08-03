@@ -16,7 +16,7 @@ print(stopwords)
 
 # stopword를 추가하고 업데이트된 stopword를 저장하세요.
 new_keywords = ['noone', 'sooo', 'thereafter', 'beyond', 'amoungst', 'among']
-updated_stopwords = None
+updated_stopwords = stopwords + new_keywords
 
 print(updated_stopwords)
 
@@ -25,7 +25,11 @@ tokenized_word = []
 
 for sentence in test_sentences:
     tokens = word_tokenize(sentence)
-    tokenized_word.append([token for token in tokens if token not in updated_stopwords])
+    new_sent = []
+    for token in tokens:
+        if token not in updated_stopwords:
+            new_sent.append(token)
+    tokenized_word.append(new_sent)
 
 print(tokenized_word)
 
@@ -33,8 +37,7 @@ print(tokenized_word)
 stemmed_sent = []
 stemmer = PorterStemmer()
 
-print('tokenized_word[0]', tokenized_word[0])
-for word in tokenized_word:
+for word in tokenized_word[0]:
     stemmed_sent.append(stemmer.stem(word))
 
 print(stemmed_sent)
